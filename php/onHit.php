@@ -1,6 +1,10 @@
 <?php
-// TODO rlr
 date_default_timezone_set("Europe/Moscow");
+if(!isset($_GET["R"]) || !isset($_GET["Y"]) || !isset($_GET["X"])){
+    echo "not enough parameters";
+    http_response_code(400);
+    exit();
+}
 $r = (float)$_GET["R"];
 $y = (float)$_GET["Y"];
 $x = (int)$_GET["X"];
@@ -38,7 +42,5 @@ function createJSON($hit, $date, $currTime){
     $scriptTime = microtime(true) * 1000 - $currTime;
     return json_encode(["hit" => $hit, "date" => $date, "scriptTime" => $scriptTime . " ms"]);
 }
-//echo $_GET["R"] . "\n";
-//echo $_GET["Y"] . "\n";
-//echo $_GET["X"] . "\n";
+
 

@@ -16,20 +16,30 @@ function submit(){
         let json = JSON.parse(xhr.responseText);
         let attempt = parseInt(sessionStorage.getItem("attempt")) + 1
         sessionStorage.setItem("attempt",attempt)
-        createRow(attempt, r, x, y, json.hit, json.date, json.scriptTime)
+        if (json.hit.includes("yes")){
+            createRow(attempt, r, x, y, json.hit, json.date, json.scriptTime,"#fff","#50c878")
+        }
+        else {
+            createRow(attempt, r, x, y, json.hit, json.date, json.scriptTime,"#fff","#f00")
+        }
     }
 }
 
-function createRow(attempt, R, X, Y, hit, time, scriptTime){
+function createRow(attempt, R, X, Y, hit, time, scriptTime,color,hitColor){
     let table = document.getElementById("table");
     let row = table.insertRow();
-    row.insertCell().innerText = attempt;
-    row.insertCell().textContent = R
-    row.insertCell().textContent = X
-    row.insertCell().textContent = Y
-    row.insertCell().textContent = hit
-    row.insertCell().textContent = time
-    row.insertCell().textContent = scriptTime
+    createCell(row.insertCell(),attempt,color)
+    createCell(row.insertCell(),R,color)
+    createCell(row.insertCell(),X,color)
+    createCell(row.insertCell(),Y,color)
+    createCell(row.insertCell(),hit,hitColor)
+    createCell(row.insertCell(),time,color)
+    createCell(row.insertCell(),scriptTime,color)
+}
+
+function createCell(cell,text,color){
+    cell.innerText = text
+    cell.style.color = color
 }
 
 function validateX(x){

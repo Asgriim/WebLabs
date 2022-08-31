@@ -1,9 +1,10 @@
-// TODO добавить валидацию x и r
 sessionStorage.setItem("attempt","0")
 let yField = document.getElementById("yField");
 let submitButton = document.getElementById("submitButton")
-// TODO добавить валидацию буккаф
+submitButton.style.borderColor = "#f00";
+submitButton.style.color = "#f00"
 function validateY(){
+    console.log(yField.value)
     if (hasLetter(yField.value)){
         return false
     }
@@ -20,13 +21,15 @@ function validateY(){
 function validSubmit() {
     if (validateY()){
         submitButton.disabled = false
+        submitButton.style.borderColor = "#50c878";
+        submitButton.style.color = "#50c878"
         return;
     }
+    submitButton.style.borderColor = "#f00";
+    submitButton.style.color = "#f00"
     submitButton.disabled = true
 }
 function hasLetter(str){
-    return /\p{L}/u.test(str);
+    return /\p{L}/u.test(str) || str.includes(",");
 }
-// let yField = document.getElementById("yField")
-// console.log(yField)
 yField.addEventListener("input",validSubmit)
