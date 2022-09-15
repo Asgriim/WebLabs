@@ -4,6 +4,7 @@
         <title>LAB 1</title>
         <meta charset="utf-8">
         <script defer src="js/validation.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
     </head>
     <style>
         *{
@@ -111,7 +112,7 @@
         }
     </style>
 
-    <body >
+    <body onload="test()">
     <div>
         <header id="hat">
             Власенков Андрей P32312
@@ -124,10 +125,10 @@
         <div id="inputBlock">
             <div id="yBlock">
                 <p><label for="yField">Введите y</label></p>
-                <input id="yField" type="text" placeholder="от -5 до 5">
+                <input  id="yField" type="text" placeholder="от -5 до 5">
             </div>
             <div id="R">
-                <p>R</p>
+                <label for="R_select"><p>R</p></label>
                 <select id="R_select">
                     <option>1</option>
                     <option>1.5</option>
@@ -165,6 +166,7 @@
 
             <div id="submit">
                 <button disabled="disabled" id="submitButton" onclick="submit()">Отправить</button>
+                <button onclick="clearLocal()">Очистить</button>
             </div>
             <div id="tableBlock">
                 <table id="table">
@@ -182,5 +184,59 @@
         </div>
     </div>
     </body>
-<script defer src="js/submit.js"></script>
+    <script defer>
+        function compare(JSON1,JSON2){
+            if (JSON1.attmp > JSON2.attmp){
+                return 1;
+            }
+            else return -1;
+        }
+        function test(){
+            //todo поправить порядок сортировки
+            //переместить атемпт в локал стораге
+            let arr = new Array();
+            // arr.clear();
+            for(let key in localStorage) {
+                if (!localStorage.hasOwnProperty(key)) {
+                    continue; // пропустит такие ключи, как "setItem", "getItem" и так далее
+                }
+                let json = JSON.parse(localStorage.getItem(key));
+                arr.push(json)
+            }
+            arr.sort(compare);
+            console.log(arr);
+            for (let i in arr){
+                // console.log(arr.at(i));
+                let js = arr.at(i);
+                console.log(js)
+                console.log(typeof js)
+                if (typeof js == "object"){
+                    let color;
+                        // let js = arr[i]
+                        if (js.hit.includes("yes")) {
+                            color = "#50c878"
+                        } else {
+                            color = "#f00"
+                        }
+                    createRow(js.attmp, js.R, js.X, js.Y, js.hit, js.date, js.scriptTime, "#fff", color)
+                }
+            }
+        }
+        function clearLocal(){
+            $("#table td").remove()
+            // $("tbody").children().remove()
+            localStorage.clear();
+            localStorage.setItem("attempt","0")
+        }
+        // function test2(){
+        //     for(let key in localStorage) {
+        //         if (!localStorage.hasOwnProperty(key)) {
+        //             continue; // пропустит такие ключи, как "setItem", "getItem" и так далее
+        //         }
+        //         console.log(localStorage.getItem(key))
+        //
+        //     }
+        // }
+    </script>
+    <script defer src="js/submit.js"></script>
 </html>

@@ -1,4 +1,6 @@
-sessionStorage.setItem("attempt","0")
+if (localStorage.getItem("attempt") == null){
+    localStorage.setItem("attempt","0");
+}
 let yField = document.getElementById("yField");
 let submitButton = document.getElementById("submitButton")
 submitButton.style.borderColor = "#f00";

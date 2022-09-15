@@ -14,8 +14,18 @@ function submit(){
     xhr.send();
     xhr.onload = function (){
         let json = JSON.parse(xhr.responseText);
-        let attempt = parseInt(sessionStorage.getItem("attempt")) + 1
-        sessionStorage.setItem("attempt",attempt)
+        let attempt = parseInt(localStorage.getItem("attempt")) + 1
+        localStorage.setItem("attempt",attempt)
+        let row = {
+            attmp:attempt,
+            R:r,
+            X:x,
+            Y:y,
+            hit:json.hit,
+            date:json.date,
+            scriptTime:json.scriptTime
+        }
+        localStorage.setItem("attempt" + attempt,JSON.stringify(row))
         if (json.hit.includes("yes")){
             createRow(attempt, r, x, y, json.hit, json.date, json.scriptTime,"#fff","#50c878")
         }
@@ -28,6 +38,7 @@ function submit(){
 function createRow(attempt, R, X, Y, hit, time, scriptTime,color,hitColor){
     let table = document.getElementById("table");
     let row = table.insertRow();
+    // table.insertBefore()
     createCell(row.insertCell(),attempt,color)
     createCell(row.insertCell(),R,color)
     createCell(row.insertCell(),X,color)
