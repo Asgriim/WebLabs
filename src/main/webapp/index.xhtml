@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <title>Lab 3</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    <h:body>
+        <h:form prependId="false">
+            <h:inputText id="bigTZ" style="visibility: hidden" value="#{timeBean.timeZoneOffset}" styleClass="customHide">
+                <f:ajax listener="#{timeBean.timeZoneChanged}" />
+            </h:inputText>
+        </h:form>
+
+        <div id="header">
+            <h1>Власенков Андрей Игоревич</h1>
+            <h3>P32312</h3>
+            <h3>Вариант 66642</h3>
+        </div>
+        <div id="timeDiv">
+            <h4>Current time</h4>
+            <p id="interactiveTime"></p>
+        </div>
+        <h:form>
+            <h:commandButton style="margin-left: 45%;margin-top: 40px; background-color: dodgerblue;font-size: 30px;color: white" value="go to main" action="gotoMain"></h:commandButton>
+        </h:form>
+        <h:outputScript library="js" name="time.js"></h:outputScript>
+        <h:outputScript library="js" name="timeZone.js"></h:outputScript>
+    </h:body>
+</f:view>
+</html>

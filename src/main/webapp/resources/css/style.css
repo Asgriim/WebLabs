@@ -1,0 +1,30 @@
+body{
+
+    background: #1c2329;
+}
+div{
+
+}
+#header {
+    color: #ffffff;
+    text-align: center;
+    border: solid black 5px;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 58px;
+    margin: 0 0 58px;
+}
+#timeDiv{
+    color: dodgerblue;
+    font-family: 'Lato', sans-serif;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 60px;
+    /*margin: auto;*/
+    border: solid black 5px;
+
+}
+#mainInputs{
+    margin-left: 45%;
+}
